@@ -14,7 +14,6 @@ namespace Sharpshooter.Champions
     {
         static Obj_AI_Hero Player { get { return ObjectManager.Player; } }
         static Orbwalking.Orbwalker Orbwalker { get { return SharpShooter.Orbwalker; } }
-        private static List<Obj_AI_Minion> minions; 
 
         static Spell Q, W, E, R;
 
@@ -83,20 +82,6 @@ namespace Sharpshooter.Champions
             Drawing.OnDraw += Drawing_OnDraw;
             Obj_AI_Hero.OnProcessSpellCast += Obj_AI_Hero_OnProcessSpellCast;
             Orbwalking.OnNonKillableMinion += Orbwalking_OnNonKillableMinion;
-
-            Obj_AI_Base.OnBuffAdd += (sender, args) => {
-                if (args.Buff.Caster.IsMe) {
-                    minions.Add((Obj_AI_Minion) sender);
-                }
-            };
-            Obj_AI_Base.OnBuffUpdateCount += (sender, args) => {
-                if (args.Buff.Caster.IsMe) {
-                    minions.Add((Obj_AI_Minion)sender);
-                }
-            };
-            Obj_AI_Base.OnBuffRemove += (sender, args) => {
-
-            };
         }
 
         static void Game_OnUpdate(EventArgs args)
